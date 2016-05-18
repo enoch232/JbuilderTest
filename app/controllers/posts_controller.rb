@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     @posts = Post.all
     respond_to do |format|
       format.html{}
-      format.json{render json: @posts, status: :ok}
+      format.json
     end
   end
   def new
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
   def show
     respond_to do |format|
       format.html{}
-      format.json{render json: @post}
+      format.json
     end
   end
   def edit
