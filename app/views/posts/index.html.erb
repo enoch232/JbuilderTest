@@ -1,0 +1,9 @@
+<h1>Index</h1>
+<%= link_to "New", new_post_path %>
+<% @posts.each do |post| %>
+<div>
+	<%= post.title %>
+	<br />
+	<%= post.body %>
+</div>
+<% end %>
