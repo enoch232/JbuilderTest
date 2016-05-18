@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     @posts = Post.all
     respond_to do |format|
       format.html{}
-      format.json{render json: @posts}
+      format.json{render json: @posts, status: :ok}
     end
   end
   def new
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   	if @post.save
   	  respond_to do |format|
         format.html{}
-  	  	format.json{ render json: @post} 
+  	  	format.json{ render json: @post, status: :create} 
   	  end
       redirect_to root_path
   	else
@@ -31,8 +31,30 @@ class PostsController < ApplicationController
       format.json{render json: @post}
     end
   end
-  def destroy
+  def edit
+
   end
+  def update
+    if @post.update(post_params)
+      respond_to do |format|
+        format.html{}
+        format.json{render json: :show, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html{}
+        format.json{render json: @post.errors }
+      end
+    end
+  end
+  def destroy
+    @post.destroy
+    respond_to do |format|
+      format.html{}
+      format.json{render status: :destroy}
+    end
+  end
+
   private
   def post_params
   	params.require(:post).permit(:title, :body)
